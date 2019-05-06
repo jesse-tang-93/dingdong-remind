@@ -1,5 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
-import Index from './pages/index'
+import Home from './pages/home/index'
 
 import './app.scss'
 
@@ -13,7 +13,8 @@ class App extends Component {
 
   config = {
     pages: [
-      'pages/index/index'
+      'pages/home/index',
+      'pages/oauth/index', 
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -40,7 +41,7 @@ class App extends Component {
   // 请勿修改此函数
   render () {
     return (
-      <Index />
+      <Home />
     )
   }
 }

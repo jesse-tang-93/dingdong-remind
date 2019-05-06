@@ -1,13 +1,10 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import { View, Text } from '@tarojs/components'
 import './index.scss'
 
-import Login from '../../components/login/login'
-
-export default class Index extends Component {
-
+export default class Home extends Component {
   config = {
-    navigationBarTitleText: '登录授权'
+    navigationBarTitleText: '选个日子，说件事情，我来提醒'
   }
 
   componentWillMount () { }
@@ -23,7 +20,7 @@ export default class Index extends Component {
   render () {
     return (
       <View className='index'>
-        <Login />
+        <Text>1</Text>
       </View>
     )
   }
