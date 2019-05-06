@@ -1,11 +1,14 @@
 // 叮咚提醒首页登录组件，发起用户授权
 import Taro, { Component } from "@tarojs/taro"
 import { View, Button, Image } from "@tarojs/components"
+import './index.scss'
+import  loginFile from '../../asset/images/login-arranging.png'
 
 export default class Login extends Component {
   state = {
     oauthBtnStatus: true, // 授权按钮是否显示 默认为显示
-    userInfo: null // 用户信息
+    userInfo: null, // 用户信息
+    btnText: '微信授权登录'
   }
   componentWillMount() {
     // 获取用户当前授权状态
@@ -40,7 +43,7 @@ export default class Login extends Component {
   getUserInfo = () => {
     Taro.getUserInfo({
       lang: 'zh_CN'
-    }).then( res => { // 用户授权成功
+    }).then( res => { // 获取成功
       this.setState(()=>({
         userInfo: res.userInfo
       }))
@@ -48,23 +51,31 @@ export default class Login extends Component {
     } )
     .catch( err => console.log(err) )
   }
-  // 用户授权
-  openOauth = () => {
-    Taro.authorize({
-      // 授权项目
-      scope: 'scope.userInfo'
-    }).then( () => { // 用户同意授权获取用户信息
-      
-    })
-    .catch(err => console.log(err))
+  // 用户授权操作后按钮回调
+  onGotUserInfo = res => {
+    if(res.detail.userInfo){ // 返回的信息中包含用户信息则证明用户允许获取信息授权
+      console.log('授权成功')
+    }else{ // 用户取消授权，进行提示，促进重新授权
+      Taro.showModal({
+        title: '温馨提示',
+        content: '简单的信任，是你我俩故事的开始',
+        showCancel: false // 不展示取消按钮
+      })
+        .then(ModalRes => {
+          if(ModalRes.confirm){ // 点击确定按钮
+            this.setState({btnText:'重新授权登录'})
+          }
+        })
+    }
   }
   render() {
-    const { oauthBtnStatus, userInfo } = this.state
+    const { oauthBtnStatus, userInfo, btnText } = this.state
     return (
-      <View className='index'>
-        { oauthBtnStatus ? <Button open-type='getUserInfo'>微信授权登录</Button> : null}
-        { userInfo ? JSON.stringify(userInfo) : null}
-        { userInfo ? <Image src={userInfo.avatarUrl} /> : null}
+      <View className='login-page'>
+        <Image src={loginFile} mode='aspectFit' className='login-img' />
+        { oauthBtnStatus ? <Button className='login-btn' openType='getUserInfo' onGetUserInfo={this.onGotUserInfo}>{btnText}</Button> : ''}
+        { userInfo ? JSON.stringify(userInfo) : ''}
+        { userInfo ? <Image src={userInfo.avatarUrl} /> : ''}
       </View>
     )
   }

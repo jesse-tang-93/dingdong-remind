@@ -1,0 +1,18 @@
+$main-color:#6968FD; // 小程序主色调
+$cff:#ffffff;
+.login-page{
+  padding: 60px 30px 0;
+  text-align: center;
+  .login-img{
+    margin: 80px auto 30px;
+    height: 620px;
+  }
+  .login-btn{
+    width: 460px;
+    line-height: 80px;
+    font-size: 30px;
+    color:$cff;
+    border-radius: 40px;
+    background-color: $main-color;
+  }
+}
