@@ -1,3 +1,4 @@
+// 提醒首页面
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import './index.scss'

@@ -13,8 +13,8 @@ class App extends Component {
 
   config = {
     pages: [
-      'pages/home/index',
-      'pages/oauth/index', 
+      'pages/oauth/index',
+      'pages/home/index', 
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -41,7 +41,7 @@ class App extends Component {
   // 请勿修改此函数
   render () {
     return (
-      <Home />
+      <App />
     )
   }
 }
